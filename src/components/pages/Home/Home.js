@@ -1,20 +1,19 @@
 import { useSelector } from 'react-redux';
-//import { getAllPosts } from '../../../Redux/postsReducer.js';
+import { getAllItems } from '../../../redux/tablesReducer.js';
 import { Container } from 'react-bootstrap';
 
-//import Post from '../../features/Post/Post.js';
+import Table from '../../features/Table/Table.js';
 
 const Home = () => {
-    //const posts = useSelector(getAllPosts)
+    const items = useSelector(getAllItems)
 
     return (
         <>
             <h1>All tables</h1>
-            <Container className="d-flex justify-content-center row">
-
+            <Container className="d-flex flex-column gap-1">
+                {items.map(item => <Table key={item.id} {...item} />)}
             </Container>
         </>
-        //                {posts.map(post => <Post key={post.id} {...post} />)}
     );
 }
 

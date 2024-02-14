@@ -10,8 +10,7 @@ const ItemPage = () => {
   
 
     return (
-        <>
-            </>
+        <div>table</div>
     );
 }
 
