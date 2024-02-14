@@ -3,6 +3,9 @@ import thunk from 'redux-thunk';
 import initialState from './initialState.js';
 import tablesReducer from './tablesReducer.js';
 
+//common selectors
+export const getAllStatus = ({status}) => status;
+
 const subreducers = {
     tables: tablesReducer,
 }

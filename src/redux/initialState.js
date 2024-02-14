@@ -28,7 +28,8 @@ const initialState = {
           "maxPeopleAmount": 3,
           "bill": 0
         }
-      ]
+      ],
+
 };
 
 export default initialState;
