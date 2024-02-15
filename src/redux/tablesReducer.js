@@ -1,3 +1,5 @@
+import {API_URL} from '../confing.js';
+
 //selectors
 export const getAllItems = ({tables}) => tables;
 export const getItemById = ({tables}, id) => tables.find((table) => table.id === id);
@@ -17,7 +19,7 @@ export const loadingStatus = payload => ({type: TOGGLE_STATUS, payload});
 export   const fetchItems = () => {
   return (dispatch) => {
     dispatch(loadingStatus(false));
-    fetch('http://localhost:3131/api/tables')
+    fetch(API_URL + '/tables')
       .then(res => res.json())
       .then(items => {
         dispatch(loadItems(items));
@@ -36,10 +38,13 @@ export const updateItemRequest = (newTable) => {
         },
         body: JSON.stringify(newTable),
       };
-      
-      fetch('http://localhost:3131/tables/' + id, options)
-      .then(res => res.json())
-      .then(newTable => dispatch(updateItem(newTable)));    
+      dispatch(loadingStatus(false));
+      fetch(API_URL+ '/tables/' + id, options)
+       .then(res => res.json())
+       .then((newTable) => {
+         dispatch(updateItem(newTable))
+         dispatch(loadingStatus(true));
+        });    
     }
 }
 

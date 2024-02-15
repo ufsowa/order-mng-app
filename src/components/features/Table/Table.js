@@ -54,7 +54,7 @@ const ItemPage = ({id}) => {
             </li> : null}
         </ul>
         <Link to={"/"} >
-            <Button onClick={handleUpdate} variant="btn btn-primary">Update</Button>
+            <Button type="submit" onClick={handleUpdate} onSubmit={(e) => e.preventDefault()} variant="btn btn-primary">Update</Button>
         </Link>
         </div>
     );
