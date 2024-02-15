@@ -1,8 +1,8 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { fetchItems } from './redux/tablesReducer.js';
+import { Container, Spinner } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchItems, dataLoaded } from './redux/tablesReducer.js';
 
 import Header from './components/views/Header/Header.js';
 import Footer from './components/views/Footer/Footer.js';
@@ -16,12 +16,14 @@ import { useEffect } from 'react';
 
 function App() {
 
+  const isLoaded = useSelector(dataLoaded);
   const dispatch = useDispatch();
   useEffect(()=> dispatch(fetchItems()), [dispatch]);
 
   return (
     <Container>
       <Header />
+      { !isLoaded ? <div className="text-center"> <Spinner /> </div>:
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/table/:id" element={<ItemPage />} />
@@ -30,6 +32,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+      }
         <Footer />
     </Container>
   );

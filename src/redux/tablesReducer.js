@@ -1,6 +1,7 @@
 //selectors
 export const getAllItems = ({tables}) => tables;
 export const getItemById = ({tables}, id) => tables.find((table) => table.id === id);
+export const dataLoaded = ({loading}) => loading;
 // actions
 const createActionName = actionName => `app/tables/${actionName}`;
 const UPDATE = createActionName('UPDATE');
@@ -10,17 +11,17 @@ const TOGGLE_STATUS = createActionName('TOGGLE_STATUS');
 // action creators
 export const updateItem = payload => ({type: UPDATE, payload});
 export const loadItems = payload => ({type: LOAD, payload});
-export const toggleStatus = () => ({type: LOAD});
+export const loadingStatus = payload => ({type: TOGGLE_STATUS, payload});
 
 // action with effects
 export   const fetchItems = () => {
   return (dispatch) => {
-    dispatch(toggleStatus());
+    dispatch(loadingStatus(false));
     fetch('http://localhost:3131/api/tables')
       .then(res => res.json())
       .then(items => {
         dispatch(loadItems(items));
-        dispatch(toggleStatus());
+        dispatch(loadingStatus(true));
       })
     }
   };
@@ -56,7 +57,7 @@ export const tablesReducer = (statePart = [], action) => {
 export const loadingReducer = (statePart = [], action) => {
   switch (action.type) {
     case TOGGLE_STATUS:
-      return statePart.toggle();
+      return action.payload;
     default:
       return statePart;
   };
