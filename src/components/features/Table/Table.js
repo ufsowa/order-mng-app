@@ -1,6 +1,6 @@
 import { Link, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getItemById, updateItem } from '../../../redux/tablesReducer.js';
+import { getItemById, updateItemRequest } from '../../../redux/tablesReducer.js';
 import { Form, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
@@ -21,7 +21,7 @@ const ItemPage = ({id}) => {
     }, [status]);
 
     const handleUpdate = (e) => {
-        dispatch(updateItem({id, status, peopleAmount, maxPeopleAmount, bill}));
+        dispatch(updateItemRequest({id, status, peopleAmount, maxPeopleAmount, bill}));
     }
 
     if(!itemData) return <Navigate to="/" />

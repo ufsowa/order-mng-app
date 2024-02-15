@@ -1,13 +1,14 @@
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import initialState from './initialState.js';
-import tablesReducer from './tablesReducer.js';
+import {tablesReducer, loadingReducer} from './tablesReducer.js';
 
 //common selectors
 export const getAllStatus = ({status}) => status;
 
 const subreducers = {
     tables: tablesReducer,
+    loading: loadingReducer
 }
 
 const reducer = combineReducers(subreducers);

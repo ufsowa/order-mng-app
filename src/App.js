@@ -1,6 +1,8 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import { Container } from 'react-bootstrap'
+import { Container } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { fetchItems } from './redux/tablesReducer.js';
 
 import Header from './components/views/Header/Header.js';
 import Footer from './components/views/Footer/Footer.js';
@@ -10,8 +12,13 @@ import About from './components/pages/About/About.js';
 import ItemPage from './components/pages/ItemPage/ItemPage.js';
 import DeletePage from './components/pages/DeletePage/DeletePage.js';
 import AddPage from './components/pages/AddPage/AddPage.js';
+import { useEffect } from 'react';
 
 function App() {
+
+  const dispatch = useDispatch();
+  useEffect(()=> dispatch(fetchItems()), [dispatch]);
+
   return (
     <Container>
       <Header />
